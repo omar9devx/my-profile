@@ -1,3 +1,38 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-cyan-400 font-mono overflow-x-hidden selection:bg-cyan-500/30 selection:text-white;
+  }
+}
+
+@layer utilities {
+  .scanline {
+    background: linear-gradient(
+      to bottom,
+      rgba(255,255,255,0),
+      rgba(255,255,255,0) 50%,
+      rgba(0,0,0,0.2) 50%,
+      rgba(0,0,0,0.2)
+    );
+    background-size: 100% 4px;
+    @apply fixed inset-0 pointer-events-none z-[60] opacity-15 h-screen w-screen;
+  }
+
+  .flicker {
+    animation: flicker 0.15s infinite;
+  }
+
+  @keyframes flicker {
+    0% { opacity: 0.97; }
+    50% { opacity: 1; }
+    100% { opacity: 0.98; }
+  }
+  
+  .typing-cursor::after {
+    content: '█';
+    @apply animate-pulse ml-1 text-cyan-500;
+  }
+}

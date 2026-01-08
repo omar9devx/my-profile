@@ -1,4 +1,4 @@
-import { Terminal, Code, FileText, Sparkles, Mail } from 'lucide-react';
+import { Terminal, Code, FileText, Sparkles, Mail, Cpu, BookOpen } from 'lucide-react';
 import { navigate, Route } from '../utils/router';
 
 interface NavigationProps {
@@ -7,42 +7,39 @@ interface NavigationProps {
 
 export default function Navigation({ currentRoute }: NavigationProps) {
   const navItems = [
-    { route: 'home' as Route, label: 'Home', icon: Terminal },
-    { route: 'projects' as Route, label: 'Projects', icon: Code },
-    { route: 'cv' as Route, label: 'CV', icon: FileText },
-    { route: 'scribbles' as Route, label: 'Scribbles', icon: Sparkles },
-    { route: 'contact' as Route, label: 'Contact', icon: Mail },
+    { route: 'home' as Route, label: '~/home', icon: Terminal },
+    { route: 'projects' as Route, label: '~/bin', icon: Code },
+    { route: 'logs' as Route, label: '~/logs', icon: BookOpen },
+    { route: 'stack' as Route, label: '~/etc', icon: Cpu },
+    { route: 'cv' as Route, label: '~/doc', icon: FileText },
+    { route: 'scribbles' as Route, label: '~/tmp', icon: Sparkles },
+    { route: 'contact' as Route, label: '~/mail', icon: Mail },
   ];
 
   return (
-    <nav className="fixed top-0 inset-x-0 z-50 bg-gray-900/95 backdrop-blur-sm border-b border-cyan-500/20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          <button
-            onClick={() => navigate('home')}
-            className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors"
-          >
-            Omar9Dev
-          </button>
+    <nav className="fixed top-0 inset-x-0 z-50 bg-black border-b border-cyan-800/50">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex items-center justify-between h-14">
+          <div className="flex items-center gap-2 text-cyan-500 font-bold hidden md:flex">
+             <span>root@omar9dev:~$</span>
+             <span className="animate-pulse">_</span>
+          </div>
 
-          <div className="flex items-center gap-1">
+          <div className="flex items-center overflow-x-auto no-scrollbar gap-1 w-full md:w-auto">
             {navItems.map(({ route, label, icon: Icon }) => {
               const active = currentRoute === route;
-
               return (
                 <button
                   key={route}
                   onClick={() => navigate(route)}
-                  className={`group flex items-center gap-2 px-4 py-2 rounded-lg transition-all motion-reduce:transition-none ${
+                  className={`flex items-center gap-2 px-3 py-1.5 text-sm transition-all whitespace-nowrap border-b-2 ${
                     active
-                      ? 'bg-cyan-500/20 text-cyan-400'
-                      : 'text-gray-300 hover:bg-gray-800 hover:text-cyan-400'
+                      ? 'border-cyan-500 text-cyan-400 bg-cyan-950/30'
+                      : 'border-transparent text-gray-500 hover:text-cyan-300 hover:bg-cyan-900/10'
                   }`}
                 >
-                  <Icon size={18} className="shrink-0" />
-                  <span className="hidden sm:inline text-sm font-medium">
-                    {label}
-                  </span>
+                  <Icon size={14} />
+                  <span>{label}</span>
                 </button>
               );
             })}

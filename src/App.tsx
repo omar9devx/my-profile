@@ -7,6 +7,8 @@ import Projects from './pages/Projects';
 import CV from './pages/CV';
 import Scribbles from './pages/Scribbles';
 import Contact from './pages/Contact';
+import Logs from './pages/Logs';   // New Import
+import Stack from './pages/Stack'; // New Import
 
 function App() {
   const [currentRoute, setCurrentRoute] = useState<Route>(getCurrentRoute());
@@ -23,25 +25,24 @@ function App() {
 
   const renderPage = () => {
     switch (currentRoute) {
-      case 'home':
-        return <Home />;
-      case 'projects':
-        return <Projects />;
-      case 'cv':
-        return <CV />;
-      case 'scribbles':
-        return <Scribbles />;
-      case 'contact':
-        return <Contact />;
-      default:
-        return <Home />;
+      case 'home': return <Home />;
+      case 'projects': return <Projects />;
+      case 'cv': return <CV />;
+      case 'scribbles': return <Scribbles />;
+      case 'contact': return <Contact />;
+      case 'logs': return <Logs />;   // New Case
+      case 'stack': return <Stack />; // New Case
+      default: return <Home />;
     }
   };
 
   return (
-    <div className="min-h-screen bg-black flex flex-col">
+    <div className="min-h-screen bg-black flex flex-col relative overflow-hidden">
+      {/* CRT Effects */}
+      <div className="scanline"></div>
+      
       <Navigation currentRoute={currentRoute} />
-      <main className="flex-1 pt-16">{renderPage()}</main>
+      <main className="flex-1">{renderPage()}</main>
       <Footer />
     </div>
   );
